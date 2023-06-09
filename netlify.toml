@@ -1,3 +1,32 @@
+# netlify.toml
 [build]
+  command = "npm run build"
+  functions = "functions"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "16"
+  
+  
+[context.production]
+  command = "npm run build"
   command = "python generate_tokens.py"
+  command = "python main.py"
   publish = "public/"
+
+[context.deploy-preview]
+  command = "npm run build"
+  command = "python generate_tokens.py"
+  command = "python main.py"
+  publish = "public/"
+  
+[context.branch-deploy]
+  command = "npm run build"
+  command = "python generate_tokens.py"
+  command = "python main.py"
+  publish = "public/" 
+  
+[context.production.environment]
+  NODE_VERSION = "16"
+  NODE_ENV = "production"
+  NODE_OPTIONS = "--max_old_space_size=4096"
