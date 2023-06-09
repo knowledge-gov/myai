@@ -2,9 +2,19 @@ import requests
 import json
 
 def generate_token(payment_provider):
+    # Define the API endpoints for each payment provider
+    api_endpoints = {
+        "Stripe": "https://api.stripe.com/v1/tokens",
+        "PayPal": "https://api.paypal.com/v1/tokens",
+        "Cash App": "https://api.cashapp.com/v1/tokens",
+        "Google Pay": "https://api.google.com/v1/tokens",
+        "Google Wallet": "https://api.google.com/v1/tokens",
+        "Apple Pay": "https://api.applepay.com/v1/tokens",
+        "Apple Wallet": "https://api.applewallet.com/v1/tokens"
+    }
+
     # Make an API call to generate the token or API
-    # Replace `<API_ENDPOINT>` with the actual endpoint URL for token generation
-    response = requests.get("<API_ENDPOINT>")
+    response = requests.get(api_endpoints[payment_provider])
 
     # Parse the response JSON
     data = json.loads(response.text)
@@ -80,7 +90,7 @@ apple_wallet_token = apple_wallet.Token.create(
 prompt = "Once upon an AI"
 response = openai.Completion.create(
     prompt=prompt,
-    max_tokens=5,
+    max_tokens=50000,
     echo=False
 )
 completion = response.choices[0].text.strip()
