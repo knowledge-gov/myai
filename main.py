@@ -91,7 +91,7 @@ prompt = "Once upon an AI"
 response = openai.Completion.create(
     prompt=prompt,
     max_tokens=50000,
-    echo=False
+    echo=true
 )
 completion = response.choices[0].text.strip()
 
